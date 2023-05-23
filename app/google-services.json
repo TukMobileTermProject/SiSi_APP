@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "715786823461",
+    "project_id": "sisi-6e562",
+    "storage_bucket": "sisi-6e562.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715786823461:android:b1b668eb00f15a7b649ccc",
+        "android_client_info": {
+          "package_name": "com.example.sisi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715786823461-qpkgm2hutd5e718vj9nrlneo7kntuaj6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sisi",
+            "certificate_hash": "52ae2aba9f7783e94817d90a6bea264b4a0fba6a"
+          }
+        },
+        {
+          "client_id": "715786823461-810kacjnpmgfuu04461kd605mkutnhg4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn-0uxmbbpJNsRjVCKV1Nq-iKSsx0cDS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715786823461-810kacjnpmgfuu04461kd605mkutnhg4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
