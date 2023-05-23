@@ -110,6 +110,7 @@
         android:layout_marginTop="10dp"
         android:text="자동 로그인"
         app:layout_constraintTop_toBottomOf="@+id/login_inputPwEdt"
-        tools:layout_editor_absoluteX="81dp" />
+        tools:layout_editor_absoluteX="81dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
