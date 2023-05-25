@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:ems="10"
+        android:hint="e-mail"
         android:inputType="textEmailAddress"
-        android:text="아이디"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_logo" />
@@ -34,8 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="passward"
         android:inputType="textPassword"
-        android:text="비밀번호"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +90,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_findIdBtn"
-        app:srcCompat="@drawable/sociallogin" />
+        app:srcCompat="@drawable/common_google_signin_btn_icon_light" />
 
     <Button
         android:id="@+id/login_loginBtn"
@@ -102,15 +102,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/login_autoLoginChkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="자동 로그인"
-        app:layout_constraintTop_toBottomOf="@+id/login_inputPwEdt"
-        tools:layout_editor_absoluteX="81dp"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
