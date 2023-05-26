@@ -69,7 +69,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="이메일 입력"
-        android:inputType="textPassword"
+        android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/join_emailTv" />
 
@@ -126,6 +126,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton

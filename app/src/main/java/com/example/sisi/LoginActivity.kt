@@ -1,6 +1,7 @@
 package com.example.sisi
 
 import android.content.Intent
+import android.graphics.Paint.Join
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
@@ -33,16 +35,14 @@ class LoginActivity:AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 9001
     private lateinit var mauth :FirebaseAuth
-
+    private var fbFireStore : FirebaseFirestore? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContentView(R.layout.activity_login)
         auth = Firebase.auth
         mauth = FirebaseAuth.getInstance()
         var currentUser = auth?.currentUser
-
+        fbFireStore = FirebaseFirestore.getInstance()
         // 자동 로그인 개발시는 OFF
        """ if (currentUser == null) {
 
@@ -91,7 +91,7 @@ class LoginActivity:AppCompatActivity() {
         }
 
         login_joinBtn.setOnClickListener {
-            //val intent = Intent(this,MakeAccount::class.java)
+            val intent = Intent(this,JoinActivity::class.java)
             startActivity(intent)
         }
         login_loginBtn.setOnClickListener {
@@ -156,6 +156,13 @@ class LoginActivity:AppCompatActivity() {
 
                 }
             }
+        val user = auth.currentUser
+        var userData:UserData = UserData()
+
+        userData.uid = user!!.uid
+        userData.email = user!!.email
+        userData.name = user!!.displayName
+        fbFireStore?.collection("UserData")?.document(user?.uid.toString())?.set(userData)
     }
 
     private fun firebaseAuthSignOut(){
