@@ -70,7 +70,7 @@ class LoginActivity:AppCompatActivity() {
         login_inputPWEdt = binding.loginInputPwEdt
         login_findIdBtn = binding.loginFindIdBtn
         login_google = binding.loginGoogle
-
+        login_findPwBtn = binding.loginFindPwBtn
         // Firebase 인증 객체 초기화
         auth = Firebase.auth
         // Google 로그인 구성
@@ -85,7 +85,10 @@ class LoginActivity:AppCompatActivity() {
             val signINIntent = googleSignInClient!!.signInIntent
             startActivityForResult(signINIntent, RC_SIGN_IN)
         }
-
+        login_findPwBtn.setOnClickListener {
+            val intent = Intent(this,FindpwdActivity::class.java)
+            startActivity(intent)
+        }
         login_joinBtn.setOnClickListener {
             val intent = Intent(this,JoinActivity::class.java)
             startActivity(intent)
@@ -101,6 +104,7 @@ class LoginActivity:AppCompatActivity() {
 
 
     }
+
     private fun signIn(email: String, password: String) {
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
