@@ -21,7 +21,6 @@ import com.google.firebase.ktx.Firebase
 private lateinit var login_inputIdEdt : EditText
 private lateinit var login_inputPWEdt : EditText
 private lateinit var  login_joinBtn :Button
-private lateinit var  login_findIdBtn : Button
 private lateinit var login_findPwBtn :Button
 private lateinit var login_loginBtn :Button
 private lateinit var login_google: ImageButton
@@ -68,7 +67,6 @@ class LoginActivity:AppCompatActivity() {
         login_joinBtn = binding.loginJoinBtn
         login_inputIdEdt = binding.loginInputIdEdt
         login_inputPWEdt = binding.loginInputPwEdt
-        login_findIdBtn = binding.loginFindIdBtn
         login_google = binding.loginGoogle
         login_findPwBtn = binding.loginFindPwBtn
         // Firebase 인증 객체 초기화
@@ -111,10 +109,9 @@ class LoginActivity:AppCompatActivity() {
             auth?.signInWithEmailAndPassword(email, password)
                 ?.addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(
-                            baseContext, "로그인에 성공 하였습니다.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        val intent:Intent = Intent(this,MainMap::class.java)
+                        intent.putExtra("email",email)
+                        startActivity(intent)
 
                     } else {
                         Toast.makeText(
