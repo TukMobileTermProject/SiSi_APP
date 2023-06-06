@@ -1,40 +1,41 @@
 package com.example.sisi
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.sisi.databinding.ActivityMainMapBinding
 
 class MainMap : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_map)
+        val binding = ActivityMainMapBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val png2 = findViewById<ImageButton>(R.id.toolbar)
-        png2.setOnClickListener {
-            val popup = android.widget.PopupMenu(applicationContext, it)
-
-            menuInflater.inflate(R.menu.popup, popup.menu)
-            popup.setOnMenuItemClickListener { item ->
-                when (item.itemId) {
-                    R.id.mypage -> {
-                        Toast.makeText(this, "마이페이지 클릭", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(applicationContext, MyPageActivity::class.java)
-                        startActivity(intent)
-                        true
-                    }
-                    R.id.refresh -> {
-                        Toast.makeText(this, "새로고침 클릭", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-
-                    else -> false
+        binding.navigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_writing -> {
+                    true
                 }
-            }
+                R.id.nav_refresh -> {
+                    finish() //인텐트 종료
 
-            popup.show()
+                    overridePendingTransition(0, 0) //인텐트 효과 없애기
+
+                    val intent = intent //인텐트
+
+                    startActivity(intent) //액티비티 열기
+
+                    overridePendingTransition(0, 0) //인텐트 효과 없애기
+
+                    true
+                }
+                R.id.nav_mypage -> {
+                    val intent = Intent(applicationContext, MyPageActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
         }
 
 
