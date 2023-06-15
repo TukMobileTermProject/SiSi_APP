@@ -1,9 +1,12 @@
 package com.example.sisi
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.sisi.databinding.ActivityJoinBinding
@@ -54,6 +57,8 @@ class JoinActivity : AppCompatActivity() {
                             dialog.show()
                             dialog.findViewById<Button>(R.id.JoinSucDialogText)?.setOnClickListener {
                                 dialog.dismiss()
+                                var outIntent = Intent(this, LoginActivity::class.java)
+                                setResult(Activity.RESULT_OK)
                             }
                             var userData:UserData = UserData()
 
@@ -63,22 +68,31 @@ class JoinActivity : AppCompatActivity() {
                             db?.collection("UserData")?.document(user?.uid.toString())?.set(userData)
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(
-                                this,
-                                "Authentication failed.",
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                            val layoutResId = R.layout.dialog_ok
+                            val dialog = AlertDialog.Builder(this)
+                                .setCancelable(false)
+                                .setView(layoutResId)
+                                .create()
+                            dialog.show()
+                            dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입 완료 되었습니다. \\n 로그인 해주세요!!")
+                            dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener {
+                                dialog.dismiss()
+                                var outIntent = Intent(this, LoginActivity::class.java)
+                                setResult(Activity.RESULT_OK)
+                                finish()
+                            }
                         }
                     }
             }
             else{
-                val layoutResId = R.layout.dialog_joinfailed
+                val layoutResId = R.layout.dialog_ok
                 val dialog = AlertDialog.Builder(this)
                     .setCancelable(false)
                     .setView(layoutResId)
                     .create()
                 dialog.show()
-                dialog.findViewById<Button>(R.id.joinFailedDialogBtn)?.setOnClickListener {
+                dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입에 실패 하였습니다 \\n 이메일 비밀번호를 확인해 주세요.")
+                dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener {
                     dialog.dismiss()
                 }
             }

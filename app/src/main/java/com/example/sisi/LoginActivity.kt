@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 
 import androidx.appcompat.app.AppCompatActivity
@@ -86,22 +87,15 @@ class LoginActivity:AppCompatActivity() {
         }
         login_findPwBtn.setOnClickListener {
             val intent = Intent(this,FindpwdActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent,0)
         }
         login_joinBtn.setOnClickListener {
             val intent = Intent(this,JoinActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent,0)
         }
         login_loginBtn.setOnClickListener {
             signIn(login_inputIdEdt.text.toString(), login_inputPWEdt.text.toString())
         }
-        login_google.setOnClickListener {
-            googleSignInClient = GoogleSignIn.getClient(this, gso)
-            val signINIntent = googleSignInClient!!.signInIntent
-            startActivityForResult(signINIntent, RC_SIGN_IN)
-        }
-
-
     }
 
     private fun signIn(email: String, password: String) {
@@ -111,17 +105,17 @@ class LoginActivity:AppCompatActivity() {
                 ?.addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val intent:Intent = Intent(this,MainMap::class.java)
-                        intent.putExtra("email",email)
+                        var loginUser = auth.currentUser
                         startActivity(intent)
-
                     } else {
-                        val layoutResId = R.layout.dialog_loginfailed
+                        val layoutResId = R.layout.dialog_ok
                         val dialog = AlertDialog.Builder(this)
                             .setCancelable(false)
                             .setView(layoutResId)
                             .create()
                         dialog.show()
-                        dialog.findViewById<Button>(R.id.JoinFailedDialogBtn)?.setOnClickListener{
+                        dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("로그인할 수 없습니다. \\n 이메일 비밀번호를 확인해 주세요")
+                        dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener{
                             dialog.dismiss()
                         }
                     }
@@ -166,6 +160,8 @@ class LoginActivity:AppCompatActivity() {
         userData.email = user!!.email
         userData.name = user!!.displayName
         fbFireStore?.collection("UserData")?.document(user?.uid.toString())?.set(userData)
+        val intent = Intent(this, MainMap::class.java)
+        startActivity(intent)
     }
 
     private fun firebaseAuthSignOut(){

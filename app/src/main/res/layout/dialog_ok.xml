@@ -6,20 +6,20 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/joinFailedDialogText"
+        android:id="@+id/okDialogTextView"
         android:layout_width="331dp"
         android:layout_height="114dp"
-        android:gravity="center"
-        android:text="회원가입에 실패 하였습니다 \n 이메일 비밀번호를 확인해 주세요."
-        android:textAlignment="center"
+
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/joinFailedDialogBtn"
+        app:layout_constraintBottom_toTopOf="@+id/okDialogBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textAlignment="center"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/joinFailedDialogBtn"
+        android:id="@+id/okDialogBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#69B2DB"
