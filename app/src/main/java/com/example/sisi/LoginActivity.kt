@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sisi.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -114,10 +115,15 @@ class LoginActivity:AppCompatActivity() {
                         startActivity(intent)
 
                     } else {
-                        Toast.makeText(
-                            baseContext, "로그인에 실패 하였습니다.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        val layoutResId = R.layout.dialog_loginfailed
+                        val dialog = AlertDialog.Builder(this)
+                            .setCancelable(false)
+                            .setView(layoutResId)
+                            .create()
+                        dialog.show()
+                        dialog.findViewById<Button>(R.id.JoinFailedDialogBtn)?.setOnClickListener{
+                            dialog.dismiss()
+                        }
                     }
                 }
         }

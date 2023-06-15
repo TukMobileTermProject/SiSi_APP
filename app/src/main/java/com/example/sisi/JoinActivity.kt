@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.sisi.databinding.ActivityJoinBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -45,11 +46,15 @@ class JoinActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             val user = auth.currentUser
-                            Toast.makeText(
-                                this,
-                                "Authentication sucsessed.",
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                            val layoutResId = R.layout.dialog_joinsuc
+                            val dialog = AlertDialog.Builder(this)
+                                .setCancelable(false)
+                                .setView(layoutResId)
+                                .create()
+                            dialog.show()
+                            dialog.findViewById<Button>(R.id.JoinSucDialogText)?.setOnClickListener {
+                                dialog.dismiss()
+                            }
                             var userData:UserData = UserData()
 
                             userData.uid = user!!.uid
@@ -67,7 +72,15 @@ class JoinActivity : AppCompatActivity() {
                     }
             }
             else{
-                Toast.makeText(this,"형식 오류",Toast.LENGTH_LONG).show()
+                val layoutResId = R.layout.dialog_joinfailed
+                val dialog = AlertDialog.Builder(this)
+                    .setCancelable(false)
+                    .setView(layoutResId)
+                    .create()
+                dialog.show()
+                dialog.findViewById<Button>(R.id.joinFailedDialogBtn)?.setOnClickListener {
+                    dialog.dismiss()
+                }
             }
         }
     }

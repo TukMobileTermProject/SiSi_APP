@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainMap"
             android:exported="false" />
         <activity
             android:name=".MyPageActivity"
@@ -34,7 +34,7 @@
             android:name=".JoinActivity"
             android:exported="true" />
         <activity
-            android:name=".MainMap"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
