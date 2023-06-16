@@ -22,7 +22,6 @@ class MyPageActivity : AppCompatActivity() {
         profileImage = binding.mypageProfileImage
         nameText = binding.mypageUserName
         modifyPwBtn = binding.mypageModifyPw
-        modifyProfileImageBtn = binding.mypageModifyImage
         findListBtn = binding.mypageFindList
     }
 }
