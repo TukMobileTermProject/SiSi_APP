@@ -58,9 +58,9 @@ class JoinActivity : AppCompatActivity() {
                             dialog.show()
                             dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입 완료 되었습니다. \\n 로그인 해주세요!!")
                             dialog.findViewById<Button>(androidx.core.R.id.dialog_button)?.setOnClickListener {
-                                dialog.dismiss()
                                 var outIntent = Intent(this, LoginActivity::class.java)
                                 setResult(Activity.RESULT_OK)
+                                dialog.dismiss()
                             }
                             var userData:UserData = UserData()
 
@@ -76,12 +76,10 @@ class JoinActivity : AppCompatActivity() {
                                 .setView(layoutResId)
                                 .create()
                             dialog.show()
-                            dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입에 실패 하였습니다. \\n 이메일 비밀번호를 확인해 주세요.")
+                            dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입에 실패 하였습니다. \n 이메일 비밀번호를 확인해 주세요.")
                             dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener {
                                 dialog.dismiss()
-                                var outIntent = Intent(this, LoginActivity::class.java)
-                                setResult(Activity.RESULT_OK)
-                                finish()
+
                             }
                         }
                     }

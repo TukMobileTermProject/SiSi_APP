@@ -105,7 +105,6 @@ class LoginActivity:AppCompatActivity() {
                 ?.addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val intent:Intent = Intent(this,MainMap::class.java)
-                        var loginUser = auth.currentUser
                         startActivity(intent)
                     } else {
                         val layoutResId = R.layout.dialog_ok
