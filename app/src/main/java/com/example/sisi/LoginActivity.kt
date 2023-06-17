@@ -113,7 +113,7 @@ class LoginActivity:AppCompatActivity() {
                             .setView(layoutResId)
                             .create()
                         dialog.show()
-                        dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("로그인할 수 없습니다. \\n 이메일 비밀번호를 확인해 주세요")
+                        dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("로그인할 수 없습니다. \n 이메일 비밀번호를 확인해 주세요")
                         dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener{
                             dialog.dismiss()
                         }

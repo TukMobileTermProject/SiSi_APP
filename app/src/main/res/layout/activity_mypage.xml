@@ -34,29 +34,29 @@
 
     <ImageView
         android:id="@+id/mypage_profileImage"
-        android:layout_width="145dp"
-        android:layout_height="122dp"
+        android:layout_width="307dp"
+        android:layout_height="262dp"
         android:layout_marginTop="36dp"
+        android:src="@drawable/profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mypage_tv"
-        tools:srcCompat="@drawable/profile" />
+        app:layout_constraintTop_toBottomOf="@+id/mypage_tv" />
 
     <TextView
         android:id="@+id/mypage_userName"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="122dp"
+        android:layout_height="66dp"
         android:layout_marginTop="36dp"
+        android:text="name"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/mypage_findList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mypage_profileImage"
-        app:layout_constraintVertical_bias="0.009"
+        app:layout_constraintVertical_bias="0.232"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -92,4 +92,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/backarrow" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

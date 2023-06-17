@@ -48,26 +48,27 @@ class JoinActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(mail, pwd)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+
                             // Sign in success, update UI with the signed-in user's information
                             val user = auth.currentUser
+                            var userData:UserData = UserData()
+                            userData.uid = user!!.uid
+                            userData.email = user!!.email
+                            userData.name = name
+                            db?.collection("UserData")?.document(user?.uid.toString())?.set(userData)
                             val layoutResId = R.layout.dialog_ok
                             val dialog = AlertDialog.Builder(this)
                                 .setCancelable(false)
                                 .setView(layoutResId)
                                 .create()
                             dialog.show()
-                            dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입 완료 되었습니다. \\n 로그인 해주세요!!")
-                            dialog.findViewById<Button>(androidx.core.R.id.dialog_button)?.setOnClickListener {
+                            dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입 완료 되었습니다. \n 로그인 해주세요!!")
+                            dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener {
                                 var outIntent = Intent(this, LoginActivity::class.java)
                                 setResult(Activity.RESULT_OK)
                                 dialog.dismiss()
+                                finish()
                             }
-                            var userData:UserData = UserData()
-
-                            userData.uid = user!!.uid
-                            userData.email = user!!.email
-                            userData.name = name
-                            db?.collection("UserData")?.document(user?.uid.toString())?.set(userData)
                         } else {
                             // If sign in fails, display a message to the user.
                             val layoutResId = R.layout.dialog_ok
@@ -80,6 +81,7 @@ class JoinActivity : AppCompatActivity() {
                             dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener {
                                 dialog.dismiss()
 
+
                             }
                         }
                     }
@@ -91,7 +93,7 @@ class JoinActivity : AppCompatActivity() {
                     .setView(layoutResId)
                     .create()
                 dialog.show()
-                dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입에 실패 하였습니다 \\n 이메일 비밀번호를 확인해 주세요.")
+                dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입에 실패 하였습니다 \n 이메일 비밀번호를 확인해 주세요.")
                 dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener {
                     dialog.dismiss()
                 }
