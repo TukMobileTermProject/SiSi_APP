@@ -50,7 +50,10 @@ class WritePost : AppCompatActivity() {
         setContentView(R.layout.activity_write_post)
         val binding = ActivityWritePostBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.wirtePostComBtn.setOnClickListener {
+            val intent = Intent(this,MainMap::class.java)
+            startActivity(intent)
+        }
         user = Firebase.auth.currentUser!!
         userUid = user.uid
 

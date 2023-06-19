@@ -1,15 +1,20 @@
 package com.example.sisi
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.sisi.databinding.ActivityJoinBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import org.w3c.dom.Text
 import java.util.regex.Pattern
 
 class JoinActivity : AppCompatActivity() {
@@ -38,36 +43,64 @@ class JoinActivity : AppCompatActivity() {
             val pwd = pwdInput.text.toString()
             val pwdCheck = pwdcheckInput.text.toString()
             val pattern :Pattern = android.util.Patterns.EMAIL_ADDRESS
+            binding.joinBackBtn.setOnClickListener {
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
+            }
 
             if(pattern.matcher(mail).matches() && pwd == pwdCheck){
                 auth.createUserWithEmailAndPassword(mail, pwd)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+
                             // Sign in success, update UI with the signed-in user's information
                             val user = auth.currentUser
-                            Toast.makeText(
-                                this,
-                                "Authentication sucsessed.",
-                                Toast.LENGTH_SHORT,
-                            ).show()
                             var userData:UserData = UserData()
-
                             userData.uid = user!!.uid
                             userData.email = user!!.email
                             userData.name = name
                             db?.collection("UserData")?.document(user?.uid.toString())?.set(userData)
+                            val layoutResId = R.layout.dialog_ok
+                            val dialog = AlertDialog.Builder(this)
+                                .setCancelable(false)
+                                .setView(layoutResId)
+                                .create()
+                            dialog.show()
+                            dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입 완료 되었습니다. \n 로그인 해주세요!!")
+                            dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener {
+                                var outIntent = Intent(this, LoginActivity::class.java)
+                                setResult(Activity.RESULT_OK)
+                                dialog.dismiss()
+                                finish()
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(
-                                this,
-                                "Authentication failed.",
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                            val layoutResId = R.layout.dialog_ok
+                            val dialog = AlertDialog.Builder(this)
+                                .setCancelable(false)
+                                .setView(layoutResId)
+                                .create()
+                            dialog.show()
+                            dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입에 실패 하였습니다. \n 이메일 비밀번호를 확인해 주세요.")
+                            dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener {
+                                dialog.dismiss()
+
+
+                            }
                         }
                     }
             }
             else{
-                Toast.makeText(this,"형식 오류",Toast.LENGTH_LONG).show()
+                val layoutResId = R.layout.dialog_ok
+                val dialog = AlertDialog.Builder(this)
+                    .setCancelable(false)
+                    .setView(layoutResId)
+                    .create()
+                dialog.show()
+                dialog.findViewById<TextView>(R.id.okDialogTextView)?.setText("회원가입에 실패 하였습니다 \n 이메일 비밀번호를 확인해 주세요.")
+                dialog.findViewById<Button>(R.id.okDialogBtn)?.setOnClickListener {
+                    dialog.dismiss()
+                }
             }
         }
     }

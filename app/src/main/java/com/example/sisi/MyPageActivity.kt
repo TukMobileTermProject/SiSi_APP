@@ -73,6 +73,10 @@ class MyPageActivity : AppCompatActivity() {
         db = Firebase.firestore
 
         downloadFromCloud(userUid)
+        binding.mypageFindList.setOnClickListener {
+            val intent = Intent(this,PostList::class.java)
+            startActivity(intent)
+        }
         //비밀번호 재설정 버튼
         modifyPwBtn.setOnClickListener {
             Firebase.auth.sendPasswordResetEmail(userEmail)
